@@ -30,11 +30,11 @@
                                         <a href="{{ route('recipients.edit', ['id'=> $model->id]) }}">
                                             <span><i class="fa fa-fw fa-edit fa-lg"></i></span>
                                         </a>
-
+                                        <a href="{{ route('recipients.view', ['id'=> $model->id]) }}">
+                                            <span><i class="fa fa-fw fa-eye fa-lg"></i></span>
+                                        </a>
 
                                     </div>
-
-                                    {!! Form::close() !!}
                                 </td>
                             </tr>
                         @endforeach

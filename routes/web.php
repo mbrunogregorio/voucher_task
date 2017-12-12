@@ -16,9 +16,9 @@ $router->get('/', function () use ($router) {
 });
 
 
-Route::get('/recipients','RecipientsController@index');
-Route::get('/recipients/{id}','RecipientsController@view');
-Route::get('/recipients/{id}/edit','RecipientsController@edit');
-Route::post('/recipients/{id}/edit','RecipientsController@edit');
-Route::delete('/recipients/{id}','RecipientsController@delete');
+Route::get('/recipients',['as'=>'recipients.index', 'uses'=>'RecipientsController@index']);
+Route::get('/recipients/{id}',['as'=>'recipients.view', 'uses'=>'RecipientsController@view']);
+Route::get('/recipients/{id}/edit',['as'=>'recipients.edit', 'uses'=>'RecipientsController@edit']);
+Route::post('/recipients/{id}/edit',['as'=>'recipients.update', 'uses'=>'RecipientsController@update']);
+Route::delete('/recipients/{id}',['as'=>'recipients.destroy', 'uses'=>'RecipientsController@delete']);
 

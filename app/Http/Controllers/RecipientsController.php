@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Recipient;
+use Illuminate\Http\Request;
 
 class RecipientsController extends Controller
 {
@@ -20,6 +21,55 @@ class RecipientsController extends Controller
     public function index(){
         $recipients = Recipient::all();
 
-        return view('recipients/index', compact('recipients'));
+        return view('recipients.index', compact('recipients'));
+    }
+
+    public function view($id = null)
+    {
+        $register = Recipient::find($id);
+
+        return view("recipients.edit", compact('register'));
+    }
+
+    public function create()
+    {
+        return view("recipients.view");
+    }
+
+    public function store(Request $request)
+    {
+        $dados = $request->all();
+
+        //validate the fields
+
+        Recipient::create($dados);
+        return redirect()->route("recipients.index");
+    }
+
+    public function edit($id = null)
+    {
+        $register = Recipient::find($id);
+
+        return view("recipients.edit", compact('register'));
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        //validate the fields
+
+        $dados = $request->all();
+
+        $register = Recipient::find($id);
+        $register->update($dados);
+
+        return redirect()->route("recipients.index");
+    }
+
+    public function destroy($id)
+    {
+        $register = Recipient::find($id);
+        $register->delete();
+
+        return redirect()->route("recipient.index");
     }
 }
