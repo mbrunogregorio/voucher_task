@@ -33,7 +33,7 @@ class RecipientsController extends Controller
 
     public function create()
     {
-        return view("recipients.view");
+        return view("recipients.create");
     }
 
     public function store(Request $request)
@@ -71,5 +71,10 @@ class RecipientsController extends Controller
         $register->delete();
 
         return redirect()->route("recipient.index");
+    }
+
+    public function vouchers($id = null){
+        $register = Recipient::find($id);
+        return view("recipients.vouchers", compact('register'));
     }
 }

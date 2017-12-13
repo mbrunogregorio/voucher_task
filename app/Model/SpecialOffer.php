@@ -14,4 +14,8 @@ class SpecialOffer extends Model
     //
     protected $fillable = ['name', 'discount'];
 
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class);
+    }
 }

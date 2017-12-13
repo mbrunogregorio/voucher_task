@@ -23,8 +23,8 @@ class CreateVouchersTable extends Migration
             $table->integer("recipient_id")->unsigned();
             $table->foreign("recipient_id")->references("id")->on("recipients");
 
-            $table->integer("specialoffer_id")->unsigned();
-            $table->foreign("specialoffer_id")->references("id")->on("special_offers");
+            $table->integer("special_offer_id")->unsigned();
+            $table->foreign("special_offer_id")->references("id")->on("special_offers");
 
             $table->timestamps();
             $table->softDeletes();
