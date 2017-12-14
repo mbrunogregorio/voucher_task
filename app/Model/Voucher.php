@@ -10,6 +10,7 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Voucher extends Model
 {
@@ -26,6 +27,11 @@ class Voucher extends Model
         return $this->belongsTo(Recipient::class);
     }
 
+    /**
+     * Generate a random voucher code, the code's lenth depend on the $length param, if it's null the
+     * value will be setted to 8
+     *
+     */
     public function generateCode($lenght = 8)
     {
 
@@ -36,18 +42,38 @@ class Voucher extends Model
         return $code;
     }
 
-    public function checkOut()
+    /**
+     * Check if a voucher is valid, the status = available and the expiration date less then currently datetime
+     */
+    public function validate()
     {
-
-        $this->status = 1;
-        $this->used_at = Carbon::now();
-
-        if ($this->save())
-            return true;
-
+        if($this->status === 0)
+            if(Carbon::now() <= $this->expire_at)
+                return true;
         return false;
     }
 
+    /**
+     * Check the e-mail address, makes the voucher's checkout, turning the status to used and setting the date of usage
+     *
+     */
+    public function checkOut($email = '')
+    {
+        if($this->recipient->email === $email){
+            $this->status = 1;
+            $this->used_at = Carbon::now();
+
+            if ($this->save())
+                return response()->json(['discount' => $this->special_offer->discount]);
+        }
+
+        return response()->json(['error' => 'Invalid Email']);
+    }
+
+    /**
+     * Turn the status atribute to readable value
+     *
+     */
     public function getStatusAttribute($value)
     {
         if (is_null($value)) {

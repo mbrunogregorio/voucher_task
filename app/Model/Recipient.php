@@ -18,4 +18,9 @@ class Recipient extends Model
     {
         return $this->hasMany(Voucher::class);
     }
+
+    public function valid_vouchers()
+    {
+
+    }
 }

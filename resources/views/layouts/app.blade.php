@@ -37,14 +37,15 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Voucher Task') }}
+                    <img alt="Newsletter2go" src="img/logo.png" width="20" height="20" />
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <a class="btn btn-default navbar-btn" href="{{ route('recipients.index') }}"><i class="fa fa-users"></i> Recipients</a>
+                    <a class="btn btn-default navbar-btn" href="{{ route('special_offers.index') }}"><i class="fa fa-money"></i> Special Offers</a>
                 </ul>
 
 

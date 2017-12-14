@@ -84,6 +84,11 @@ class SpecialOffersController extends Controller
         return view("special_offers.vouchers_form", compact('register'));
     }
 
+
+    /**
+     * Receives a request with the expiration date and generates a voucher for each recipient
+     *
+     */
     public function vouchers_generate(Request $request, $id = null)
     {
 

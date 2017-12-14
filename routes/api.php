@@ -21,17 +21,12 @@ $router->group(['namespace' => 'Api'], function () use ($router) {
 
         $router->group(['prefix' => 'recipients'], function () use ($router) {
             Route::get('/', ['as' => 'recipients.index', 'uses' => 'RecipientsController@index']);
-            Route::get('/{id}/edit', ['as' => 'recipients.edit', 'uses' => 'RecipientsController@edit']);
-            Route::post('/{id}/edit', ['as' => 'recipients.update', 'uses' => 'RecipientsController@update']);
-            Route::delete('/{id}', ['as' => 'recipients.destroy', 'uses' => 'RecipientsController@delete']);
-            Route::get('/{id}/vouchers', ['as' => 'recipients.vouchers', 'uses' => 'RecipientsController@vouchers']);
+            Route::post('/vouchers', ['as' => 'recipients.vouchers', 'uses' => 'RecipientsController@vouchers']);
         });
 
         $router->group(['prefix' => 'special_offers'], function () use ($router) {
             Route::get('/', ['as' => 'special_offers.index', 'uses' => 'SpecialOffersController@index']);
-            Route::get('/{id}/edit', ['as' => 'special_offers.edit', 'uses' => 'SpecialOffersController@edit']);
             Route::get('/{id}/vouchers', ['as' => 'special_offers.vouchers', 'uses' => 'SpecialOffersController@vouchers']);
-            Route::get('/{id}/vouchers/form', ['as' => 'special_offers.vouchers.form', 'uses' => 'SpecialOffersController@vouchers_form']);
         });
 
         $router->group(['prefix' => 'voucher'], function () use ($router) {
