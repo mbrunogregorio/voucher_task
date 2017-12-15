@@ -4,7 +4,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use \Illuminate\Support\Facades\Artisan;
 
-abstract class TestCase extends Laravel\Lumen\Testing\TestCase
+class VouchersTest extends Laravel\Lumen\Testing\TestCase
 {
     /**
      * Creates the application.
