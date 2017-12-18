@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$router->get('/', function () use ($router) {
+/*$router->get('/', function () use ($router) {
     return $router->app->version();
 });
-Route::get('/a',['uses'=>'SpecialOffersController@index']);
+*/
+Route::get('/',['uses'=>'SpecialOffersController@index']);
 
 $router->group(['prefix' => 'recipients'], function () use ($router) {
         Route::get('/',['as'=>'recipients.index', 'uses'=>'RecipientsController@index']);

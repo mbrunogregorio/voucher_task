@@ -30,31 +30,25 @@ class SpecialOffersTest extends Laravel\Lumen\Testing\TestCase
     public function testSpecialOfferList()
     {
         $offers = \App\Model\SpecialOffer::all();
-
         if(!is_null($offers))
             $this->assertTrue(true);
     }
 
-    public function testVouchersCreation()
+    public function testVouchersGenerate()
     {
-        dd(route('special_offers.vouchers.generate', ['id' => 1]));
-        $recipient = \App\Model\Recipient::create(['name' => 'Test Recipient', 'email' => str_random(6).'@recipient.com']);
         $offer = \App\Model\SpecialOffer::create(['name' => 'Test Offer', 'discount' => 40]);
-
         $this->assertTrue($offer->id!='');
-        $this->assertTrue($recipient->id!='');
+        $offer_id = $offer->id;
 
-        $this->call('POST', 'http://localhost:8000/'.route('special_offers.vouchers.generate', ['id' => 1]),
-            ['expire_at' => \Carbon\Carbon::now(),
-                'code' => 'abcd1234',
-                'special_offer_id' => $offer->id,
-                'recipient_id' => $recipient->id,
+        $this->call('POST', url("http://localhost:8000/special_offers/{$offer->id}/vouchers/generate"),
+            [
+                'expire_at' => \Carbon\Carbon::now(),
+                'code_lenght' => '10',
+                'special_offer_id' => $offer_id,
                 ]);
-        #dd($result);
-        $this->assertResponseStatus(302);
-        $this->seeInDatabase('vouchers', ['special_offer_id' => $offer->id, 'recipient_id' => $recipient->id]);
-    }
-/*
 
-    */
+        $this->assertResponseStatus(302);
+        $this->seeInDatabase('vouchers', ['special_offer_id' => $offer_id]);
+    }
+
 }

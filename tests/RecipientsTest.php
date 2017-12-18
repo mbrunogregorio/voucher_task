@@ -22,19 +22,18 @@ class RecipientsTest extends Laravel\Lumen\Testing\TestCase
 
     public function testRecipientCreation()
     {
-        $this->json('POST', '/recipients/store', ['name' => 'Lorem Ipsummm', 'email' => 'teste@hotmail.com']);
-        #dd($result);
+
+        $email = str_random(4).'@test.com';
+        $this->json('POST', '/recipients/store', ['name' => 'Lorem Ipsummm', 'email' => $email]);
         $this->assertResponseStatus(302);
-        $this->seeInDatabase('recipients', ['email' => str_random(4).'@hotmail.com']);
+        $this->seeInDatabase('recipients', ['email' => $email]);
     }
 
     public function testRecipientList()
     {
         $recipients = \App\Model\Recipient::all();
-
         if(!is_null($recipients))
             $this->assertTrue(true);
     }
 
-    //Todo TEST VALID VOUCHER'S LIST
 }

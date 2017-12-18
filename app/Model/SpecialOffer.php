@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: DI
- * Date: 11/12/2017
- * Time: 10:23
+ * User: Bruno Gregorio
+ * Date: 16/12/2017
+ * Time: 10:21
  */
 namespace App\Model;
 
